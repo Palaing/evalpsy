@@ -1,0 +1,4 @@
+bcrypt==4.0.1
+bottle==0.12.23
+bottle-sqlite==0.2.0
+gunicorn
