@@ -1,4 +1,4 @@
-from bottle import get, post, debug, run, template, default_app
+from bottle import route, get, post, debug, run, template, default_app
 import bottle.ext.sqlite
 import os
 import home
