@@ -5,7 +5,7 @@ import home
 
 onrender = 'RENDER' in os.environ
 # debug(not onrender)
-debug(TRUE)
+debug(True)
 
 plugin = bottle.ext.sqlite.Plugin(dbfile='db/evalpsy.db', keyword='db')
 # app.install(plugin)
