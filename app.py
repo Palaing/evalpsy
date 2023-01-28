@@ -4,7 +4,8 @@ import os
 import home
 
 onrender = 'RENDER' in os.environ
-debug(not onrender)
+# debug(not onrender)
+debug(TRUE)
 
 plugin = bottle.ext.sqlite.Plugin(dbfile='db/evalpsy.db', keyword='db')
 # app.install(plugin)
@@ -16,9 +17,9 @@ if __name__ == '__main__':
 	if not onrender:
 		run(host='localhost', port=8000, debug=True, reloader=True, plugins=(plugin,))
 
-# @route('/hello/<name>')
-# def index(name):
-	# return template('<b>Hello {{name}}</b>!', name=name)
+@route('/hello/<name>')
+def index(name):
+	return template('<b>Hello {{name}}</b>!', name=name)
 
 # to run on render with gunicorn:	
 app = default_app()
