@@ -14,7 +14,7 @@ app.install(plugin)
 if __name__ == '__main__':
 	if onrender:
 		hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-		run(host=hostname, port=80)
+		run(host=hostname, port=80, debug=True, plugins=(plugin,))
 	if not onrender:
 		run(host='localhost', port=8000, debug=True, reloader=True, plugins=(plugin,))
 
