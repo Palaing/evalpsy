@@ -7,16 +7,16 @@ onrender = 'RENDER' in os.environ
 # debug(not onrender)
 debug(True)
 
-app = bottle.Bottle()
+app = default_app()
 plugin = bottle.ext.sqlite.Plugin(dbfile='db/evalpsy.db', keyword='db')
 app.install(plugin)
 
 if __name__ == '__main__':
 	if onrender:
 		hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-		run(host=hostname, port=80, debug=True, plugins=(plugin,))
+		run(host=hostname, port=80, debug=True)
 	if not onrender:
-		run(host='localhost', port=8000, debug=True, reloader=True, plugins=(plugin,))
+		run(host='localhost', port=8000, debug=True, reloader=True)
 
 @route('/hello/<name>')
 def index(name):
