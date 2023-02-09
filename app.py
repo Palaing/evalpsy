@@ -37,7 +37,7 @@ app.install(authplugin)
 app.config['auth_plugin'] = authplugin
 
 import home
-# import admin
+import admin
 # import invite
 
 if __name__ == '__main__':

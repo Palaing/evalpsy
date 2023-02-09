@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Statut de participation des praticiens</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+% include('vues/header.tpl', titre='Statut de participation des praticiens')
+<div class="container">
+	<div class="table-wrapper-scroll-y my-custom-scrollbar">
+	  <form method="post" id="pratform" action="/showprat"  accept-charset='utf-8'>
+		<table class="table table-striped table-sm" id="pratstable">
+			<thead>
+				<tr>
+					<th scope="col">email</th>
+					<th scope="col">invité le
+					<!-- <br><input type="checkbox" id="selectinvite" onclick="selectall(this, 0)"/><small><label for="selectinvite">Select</label></small> -->
+					</th>
+					<th scope="col">relancé le
+					<!-- <br><input type="checkbox" id="selectrelance" onclick="selectall(this, 1)"/><small><label for="selectrelance">Select</label></small> -->
+					</th>
+					<th scope="col">connecté le <input type="checkbox" id="checkconnect" onclick="filter()"/></th>
+					<th scope="col">participants <input type="checkbox" id="checkpatients" onclick="filter()"/></th>
+				</tr>
+			</thead>
+			<tbody>		
+				% if praticiens:
+				% for row in praticiens:
+				<tr>
+					<td scope="col">{{row[0] or ''}}</td>
+					<!-- <td scope="col">{{!row[1] or '<input type="checkbox" name="invite_' + row[0]+ '"/>'}}</td> -->
+					<td scope="col">{{row[1] or ''}}</td>
+					<!-- <td scope="col">{{!row[2] or '<input type="checkbox" name="relance_' + row[0]+ '"/>'}}</td> -->
+					<td scope="col">{{row[2] or ''}}</td>
+					<td scope="col">{{row[3] or ''}}</td>
+					<td scope="col">{{row[4] or ''}}</td>
+				</tr>
+				% end
+				% end
+			</tbody>
+		</table>	
+		<!-- <div class="row mx-auto" style="max-width: 480px;"> -->
+			<!-- <div class="col d-flex justify-content-center"> -->
+				<!-- <button type="submit" class="btn btn-primary btn-block">Envoyer</button> -->
+			<!-- </div> -->
+			<!-- <div class="col d-flex justify-content-center"> -->
+				<!-- <button type="button" class="btn btn-reset btn-block" onclick="doreset()">Effacer tout</button> -->
+			<!-- </div> -->
+		<!-- </div> -->
+	  </form>	
+	</div>
+</div>
+<script>
+function doreset() {
+	document.getElementById("pratform").reset();
+	filter();
+}
+function selectall(masterbox, col) {
+  var check, cbox, table, tr, i;
+  table = document.getElementById("pratstable");
+  tr = table.getElementsByTagName("tr");
+  check = masterbox.checked;
+  for (i = 1; i < tr.length; i++) {
+	cbox = tr[i].getElementsByTagName("input")[col];
+	cbox.checked = check;
+  }
+}
+function filter() {
+  var chkrel, chkcon, table, tr, td1, td2, val1, val2, i;
+  chk1 = document.getElementById("checkconnect").checked;
+  chk2 = document.getElementById("checkpatients").checked;
+  table = document.getElementById("pratstable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+	td1 = tr[i].getElementsByTagName("td")[3];
+	val1 = td1.textContent || td1.innerText;
+	td2 = tr[i].getElementsByTagName("td")[4];
+	val2 = td2.textContent || td2.innerText;
+	console.log(val2);
+	if ((chk1 && !val1) || (chk2 && !val2)) {
+		tr[i].style.display = "none";
+	} else {
+		tr[i].style.display = "";
+	}
+  }
+}
+</script>
+</body>
+</html>
