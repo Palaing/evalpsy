@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Enregistrement d'un participant</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<style type="text/css">
+.required .form-label:after {
+  content:"*";
+  color:red;
+}
+.center {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+% include('vues/header.tpl', titre="Enregistrement d'un participant à l'étude")
+<div class="container" style="max-width: 480px;">
+	<form method='POST' action='/add' accept-charset='utf-8'>
+		<div class="row mb-4">
+			<div class="col-3 text-right"><label class="form-label" for="prenom">Prénom</label></div>
+			<div class="col"><input type="text" id="prenom" name="prenom" class="form-control"  /></div>
+		</div>		
+		<div class="row mb-4">
+			<div class="col-3 text-right"><label class="form-label" for="nom">Nom</label></div>
+			<div class="col"><input type="text" id="nom" name="nom" class="form-control"  /></div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-3 required text-right"><label class="form-label" for="email">Email</label></div>
+			<div class="col">
+				<input type="email" id="email" name="email" class="form-control" required />
+				<small class="form-text text-muted">Uniquement utilisé pour joindre le patient durant l'étude</small>
+			</div>
+		</div>		
+		<div class="row mb-4">
+			<div class="col-3 text-right"><label class="form-label" for="telephone">Téléphone</label></div>
+			<div class="col">
+				<input type="tel" id="telephone" name="telephone" class="form-control" />
+				<small class="form-text text-muted">Uniquement utilisé pour joindre le patient durant l'étude en cas de difficulté avec le mail</small>
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-3 required text-right"><label class="form-label" for="newpatient">Nouveau patient</label></div>
+			<div class="col">
+				<input type="radio" name="newpatient" value="1" required>
+				<label class="form-check-label" for="0">oui</label><br>
+				<input type="radio" name="newpatient" value="0" required>
+				<label class="form-check-label" for="1">non</label><br>
+				<small class="form-text text-muted">Est-ce la première séance avec ce patient?</small>
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-3 required text-right"><label class="form-label" for="symptome">Symptôme</label></div>
+			<div class="col"><textarea id="symptome" name="symptome" class="form-control" style="min-width: 100%" required></textarea></div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-3 required text-right"><label class="form-label" for="intensite">Intensité du symptôme</label></div>
+			<div class="col">
+				<input type="radio" name="intensite" value="0" required>
+				<label class="form-check-label" for="0">nulle</label><br>
+				<input type="radio" name="intensite" value="1" required>
+				<label class="form-check-label" for="1">très faible</label><br>
+				<input type="radio" name="intensite" value="2" required>
+				<label class="form-check-label" for="2">faible</label><br>
+				<input type="radio" name="intensite" value="3" required>
+				<label class="form-check-label" for="3">moyenne</label><br>
+				<input type="radio" name="intensite" value="4" required>
+				<label class="form-check-label" for="4">forte</label><br>
+				<input type="radio" name="intensite" value="5" required>
+				<label class="form-check-label" for="5">très forte</label><br>
+				<input type="radio" name="intensite" value="6" required>
+				<label class="form-check-label" for="6">extrême</label><br>
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col d-flex justify-content-center">
+				<button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+			</div>
+			<div class="col d-flex justify-content-center">
+				<button type="reset" class="btn btn-reset btn-block">Effacer tout</button>
+			</div>
+		</div>
+	</form>
+</div>
+</body>
+</html>

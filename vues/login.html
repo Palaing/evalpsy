@@ -7,19 +7,19 @@
 </head>
 <body>
 <div class="container" style="max-width: 480px;">
-	<form method='POST' action='/login'>
-		<div class="row mb-4">
-			<h3>Connexion</h3>
-			<!-- <p>Veuillez vous connecter:</p> -->
-			% if message:
-			<div class="alert alert-danger" role="alert">{{message}}</div>
-			% end			
-		</div>
-		<div class="form-outline mb-4">
+	<form method='POST' action='/login' accept-charset='utf-8'>
+		% if redirecturl:
+		<input type="hidden" name="redirecturl" id="" value="{{redirecturl}}" />
+		% end			
+		<div class="row mb-4"><h3>Connexion</h3></div>
+		% if get('message'):
+		<div class="row mb-4 alert alert-danger justify-content-center" role="alert">{{message}}</div>
+		% end			
+		<div class="mb-4">
 			<input type="email" id="email" name="email" class="form-control" required />
 			<label class="form-label" for="email">Adresse email</label>
 		</div>		
-		<div class="form-outline mb-4">
+		<div class="mb-4">
 			<input type="password" id="password" name="password" class="form-control" required />
 			<label class="form-label" for="password">Mot de passe</label>
 		</div>

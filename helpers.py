@@ -1,29 +1,27 @@
-from bottle import template, request
-from datetime import datetime
+#-------------------------------------------------------------------------------
+# Name:			app.py
+# Purpose:		"evalpsy" app
+#				utility functions
+#
+# Author:		a.goye
+#
+# Created:		8/02/2023
+# Copyright:	(c) a.goye 2023
+# Licence:		GPLv3
+#-------------------------------------------------------------------------------
 
-secret = "f08gOAX7ptb5eKHi1Q86YjKSEewYqchu5QCZPchmSEpFAu1IBDWqSYaGF42ir6RnxQthWNlJjvcXvYdw1e8g8zYVGVCbIGBNuHL"
+from bottle import template, abort
+
+def ensureadmin(user):
+	if not user['isadmin']:
+		abort(401)
 
 def log(msg):
-	with open('form.log', 'a', encoding='utf-8') as logfile:
+	with open('evalpsy.log', 'a', encoding='utf-8') as logfile:
 		logfile.write('\n' + msg)
 	return msg
 
-def sessionid():
-	idtoday = request.get_cookie('session', secret=secret)
-	if idtoday:
-		userid, prenom, sessiondate = idtoday.split(':')
-		if sessiondate == str(datetime.date(datetime.now())):
-			return (userid, prenom)
-	return ('','')
-	# if userid and sessiondate == str(datetime.date(datetime.now())):
-		# redirect('/home')
-	# else:
-		# return ftemplate('login.html', message = 'Votre session est échue. Veuillez vous reconnecter')
-
-def tempfile(file):
+def ftemplate(file,**kwargs):
 	with open('vues/' + file, 'r', encoding='utf-8') as template_file:
 		tempstring = template_file.read()
-	return tempstring
-
-def ftemplate(file,**kwargs):
-	return template(tempfile(file),kwargs)
+	return template(tempstring,kwargs)
