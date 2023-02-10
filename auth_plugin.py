@@ -26,17 +26,16 @@ class authPlugin(object):
 	def sessiondata(self):
 		idtoday = request.get_cookie('session', secret=self.secret)
 		if idtoday:
-			idnumber, prenom, sessiondate = idtoday.split(':')
+			id, prenom, sessiondate = idtoday.split(':')
 			if sessiondate == str(datetime.date(datetime.now())):
 				return {
-					'idnumber': idnumber, 
+					'id': id, 
 					'prenom': prenom, 
-					'isadmin': idnumber in self.adminids
+					'isadmin': id in self.adminids
 				}
 		return dict()
 		
 	def apply(self, callback, context):
-		# conf = context.config.get('auth') or {}
 		keyword = self.keyword
 		
 		spec = inspect.getfullargspec(callback)

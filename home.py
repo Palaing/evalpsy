@@ -10,7 +10,7 @@
 # Licence:		GPLv3
 #-------------------------------------------------------------------------------
 
-from bottle import get, post, template, request, response, redirect, error
+from bottle import get, post, request, response, redirect, error
 from datetime import datetime
 from helpers import ensureadmin, log, ftemplate
 from auth_plugin import authPlugin
@@ -21,8 +21,8 @@ def check_pwd(email, password, db):
 	query = 'SELECT id, password, prenom FROM praticien WHERE email=?'
 	row = db.execute(query, (email,)).fetchone()
 	if row and row[1] and \
-		password == row[1]:
-		# bcrypt.checkpw(password.encode('utf-8'),row[1].encode('utf-8')):
+		bcrypt.checkpw(password.encode('utf-8'),row[1]):
+		# password == row[1]:	# if no pwd encryption in table praticiens 
 		return (row[0], row[2])
 	return('','')
 
@@ -37,9 +37,9 @@ def do_login(db):
 	email = request.forms.getunicode('email')
 	password = request.forms.getunicode('password')
 	redirecturl = request.forms.getunicode('redirecturl', '/add')
-	idnumber, prenom = check_pwd(email, password, db)
-	if idnumber:
-		idtoday = str(idnumber) + ':' + prenom + ':' + str(datetime.date(datetime.now()))
+	id, prenom = check_pwd(email, password, db)
+	if id:
+		idtoday = str(id) + ':' + prenom + ':' + str(datetime.date(datetime.now()))
 		response.set_cookie('session', idtoday, secret=request.app.config.get('secret'))
 		redirect(redirecturl)
 	else:
@@ -84,7 +84,7 @@ def do_add(user, db):
 	query = 'INSERT INTO participant 	\
 		(prenom, nom, telephone, email, newpatient, datein, symptome, intensite, praticien_id) \
 		VALUES (?,?,?,?,?,?,?,?,?);'
-	cur.execute(query, (prenom, nom, telephone, email, newpatient, datein, symptome, intensite, user['idnumber'],))
+	cur.execute(query, (prenom, nom, telephone, email, newpatient, datein, symptome, intensite, user['id'],))
 
 	cur.execute(checkquery, (email,))
 	if len(cur.fetchall()) < 1:
@@ -97,7 +97,7 @@ def do_add(user, db):
 def show(user, db):
 	query = "SELECT nom,  prenom,  email,  telephone,  datein 	\
 		FROM participant WHERE praticien_id=?"
-	cur = db.execute(query, (user['idnumber'],))
+	cur = db.execute(query, (user['id'],))
 	participants = cur.fetchall()
 	return ftemplate('patientlist.html', user=user, participants=participants)
 	
