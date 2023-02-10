@@ -41,7 +41,7 @@ app.config['auth_plugin'] = authplugin
 import home
 import admin
 import resetpwd
-# import invite
+import invite
 
 # @route('/hello/<name>')
 # def index(name):
