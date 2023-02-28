@@ -1,4 +1,4 @@
-# Readme for \evalpsy\
+# Readme for evalpsy
 
 ## Purpose
 A small application designed to manage a study to evaluate the efficiency of an approach of psychotherapy called maïeusthesis - which means "the art of being sensitive (aisthêsis in Greek) to the birth (Maïa is the Greek goddess of childbirth) of parts of oneself".
@@ -57,7 +57,7 @@ Accessible only to admin users. Contains all routes to:
 
 ## Other files
 * *helpers.py*: utility functions
-* *auth_plugin.py*: authentication plugin for restricted pages
+* *authplugin.py*: authentication plugin for restricted pages
 * *sendmail.py*: a smtplib.SMTP wrapper to simplify sending email messages
 
 ## Configuration files
