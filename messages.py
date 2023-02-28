@@ -83,3 +83,24 @@ Si vous ne souhaitez plus participer à cette étude et que vos données personn
 """
 
 rappel2_patient = "(rappel) " + appel2_patient
+
+# ###################### logging and registering participants
+invalid_mails =		"Les emails suivants ne sont pas valides: "
+existing_mails =	"Les emails suivants sont déjà enregistrés: "
+unrecorded_mails =	"Les emails suivants n'ont pas été enregistrés: "
+connexion_failed =	"La connexion a échoué; veuillez vérifier vos identifiants"
+logout_ok =			"Vous avez bien été déconnecté"
+request_validmail =	"Veuillez saisir une adresse email valide"
+record_exists =		"Un participant a déjà été enregistré avec cet email"
+recording_failed =	"Une erreur s'est produite, le participant n'a pu être enregistré"
+recording_success =	"Participant enregistré"
+
+# ###################### resetting password
+reset_mail_sent =	"Si vous avez fourni une adresse mail valide, un message vous a été envoyé. Veuillez consulter votre messagerie"
+error_occured =		"Une erreur s'est produite"
+invalid_link = 		"Une erreur s'est produite. Le lien utilisé est invalide"
+reset_lnk_timeout =	"Le lien de réinitialisation du mot de passe a expiré"
+pwd_not_recorded = 	"Une erreur s'est produite, le mot de passe n'a pas été enregistré"
+pwd_reset_timeout = "Le délai de réinitialisation du mot de passe a expiré"
+invalid_pwd = 		"Le mot de passe fourni n'est pas valide. Veuillez réessayer"
+pwd_recorded = 		"Votre nouveau mot de passe a été enregistré avec succès"

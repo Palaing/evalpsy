@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # Name:			sendmail.py
 # Purpose:		simplify sending email messages
 #
@@ -7,7 +7,7 @@
 # Created:		6/02/2023
 # Copyright:	(c) a.goye 2023
 # Licence:		GPLv3
-#-------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 
 import smtplib
 from email import encoders
@@ -20,12 +20,12 @@ from config import mail
 tomail = mail['to']
 frommail = mail['from']
 	
-# sends an email (default recipient is tomail); first line is taken as mail subject
+# sends an email (default recipient is tomail); first line ismail subject
 # returns 'success' or 'failure'
 # +++ note: attachment is given as a string; it must be coded in utf8 +++
 
-def sendmail(mailcontent, sendtomail=tomail, sendfrommail=frommail, 
-				replytomail='', attachment='', filename=''):
+def sendmail(mailcontent, sendtomail=tomail, sendfrommail=frommail,
+			replytomail='', attachment='', filename=''):
 	[subject, nline, text] = mailcontent.partition('\n')
 	if attachment:
 		msg = MIMEMultipart()	
@@ -35,7 +35,8 @@ def sendmail(mailcontent, sendtomail=tomail, sendfrommail=frommail,
 		encoders.encode_base64(payload)
 		if not filename:
 			filename = 'fichier.txt'
-		payload.add_header('Content-Disposition', f'attachment; filename= {filename}')
+		payload.add_header('Content-Disposition', 
+							f'attachment; filename= {filename}')
 		msg.attach(payload)
 	else:
 		msg = EmailMessage()	

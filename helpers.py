@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # Name:			app.py
 # Purpose:		"evalpsy" app
 #				utility functions
@@ -8,9 +8,10 @@
 # Created:		8/02/2023
 # Copyright:	(c) a.goye 2023
 # Licence:		GPLv3
-#-------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 
 from bottle import template, abort
+import re
 
 def ensureadmin(user):
 	if not user['isadmin']:
@@ -25,3 +26,6 @@ def ftemplate(file,**kwargs):
 	with open('vues/' + file, 'r', encoding='utf-8') as template_file:
 		tempstring = template_file.read()
 	return template(tempstring,kwargs)
+	
+def validmail(email):
+	return bool(re.match(r'[^@]+@[^@]+\.[^@]+', email))

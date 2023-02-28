@@ -1,5 +1,5 @@
-#-------------------------------------------------------------------------------
-# Name:			auth_plugin.py
+#-----------------------------------------------------------------------------
+# Name:			authplugin.py
 # Purpose:		"evalpsy" app
 #				authentication plugin
 #
@@ -8,15 +8,15 @@
 # Created:		8/02/2023
 # Copyright:	(c) a.goye 2023
 # Licence:		GPLv3
-#-------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 
 from bottle import request, redirect, makelist
 from datetime import datetime
 import inspect
 
-class authPlugin(object):
+class AuthPlugin(object):
 
-	name = 'auth_plugin'
+	name = 'authplugin'
 
 	def __init__(self, keyword='user', secret='', adminids=['1']):
 		self.keyword = keyword
